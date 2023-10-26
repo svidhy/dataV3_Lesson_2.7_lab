@@ -36,12 +36,11 @@ LIMIT 1;
 -- 4. Most active customer (the customer that has rented the most number of films)
 SELECT * from rental;
 
-SELECT first_name, last_name, COUNT(r.customer_id) as num_films_rented
-FROM rental r
-JOIN customer c
-ON r.customer_id = c.customer_id
-GROUP BY r.customer_id
-ORDER BY r.customer_id DESC
+SELECT first_name, last_name, COUNT(r.rental_id) as num_films_rented
+FROM customer c
+JOIN rental r USING(customer_id)
+GROUP BY c.customer_id
+ORDER BY num_films_rented DESC
 LIMIT 1;
 
 -- 5. Display the first and last names, as well as the address, of each staff member.
